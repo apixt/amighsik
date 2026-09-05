@@ -6,10 +6,9 @@ WORKDIR /app
 COPY docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 
-# Install system dependencies for Chromium upfront
+# Install system dependencies for Chromium (Debian Trixie compatible)
 RUN apt-get update && apt-get install -y \
     libglib-2.0-0 \
-    libgconf-2-4 \
     libfontconfig1 \
     libx11-6 \
     libx11-xcb1 \
