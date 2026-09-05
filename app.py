@@ -15,9 +15,19 @@ from dotenv import load_dotenv
 load_dotenv()
 
 if __name__ == "__main__":
+    host = os.getenv("HOST", "0.0.0.0")
+    port_str = os.getenv("PORT", "8000")
+    
+    # Ensure PORT is a valid integer
+    try:
+        port = int(port_str)
+    except ValueError:
+        print(f"Warning: PORT='{port_str}' is not a valid integer, using 8000")
+        port = 8000
+    
     uvicorn.run(
         "server.api:app",
-        host=os.getenv("HOST", "127.0.0.1"),
-        port=int(os.getenv("PORT", "8000")),
+        host=host,
+        port=port,
         reload=False,
     )
